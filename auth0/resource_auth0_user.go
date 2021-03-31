@@ -229,7 +229,6 @@ func deleteUser(d *schema.ResourceData, m interface{}) error {
 }
 
 func buildUser(d *schema.ResourceData) (u *management.User, err error) {
-
 	u = new(management.User)
 	u.ID = String(d, "user_id", IsNewResource())
 	u.Connection = String(d, "connection_name")
@@ -310,7 +309,6 @@ func validateNoPasswordAndEmailVerifiedSimultaneously() validateUserFunc {
 }
 
 func assignUserRoles(d *schema.ResourceData, m interface{}) error {
-
 	add, rm := Diff(d, "roles")
 
 	var addRoles []*management.Role

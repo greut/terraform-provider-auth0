@@ -44,6 +44,9 @@ func init() {
 				},
 			},
 		},
+		DataSourcesMap: map[string]*schema.Resource{
+			"auth0_user": dataSourceUser(),
+		},
 		ResourcesMap: map[string]*schema.Resource{
 			"auth0_client":          newClient(),
 			"auth0_global_client":   newGlobalClient(),
@@ -58,6 +61,8 @@ func init() {
 			"auth0_email":           newEmail(),
 			"auth0_email_template":  newEmailTemplate(),
 			"auth0_user":            newUser(),
+			"auth0_user_data":       newUserData(),
+			"auth0_user_roles":      newUserRoles(),
 			"auth0_tenant":          newTenant(),
 			"auth0_role":            newRole(),
 			"auth0_log_stream":      newLogStream(),
@@ -71,7 +76,6 @@ func Provider() *schema.Provider {
 }
 
 func Configure(data *schema.ResourceData) (interface{}, error) {
-
 	domain := data.Get("domain").(string)
 	id := data.Get("client_id").(string)
 	secret := data.Get("client_secret").(string)
